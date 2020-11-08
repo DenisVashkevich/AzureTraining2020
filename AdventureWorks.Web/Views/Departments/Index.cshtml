@@ -4,6 +4,13 @@
     ViewBag.Title = "Departments";
 }
 
+@section scripts
+ {
+    <script type="text/javascript">
+        appInsights.trackPageView({ name: 'Departments (JS)' }); 
+    </script>
+}
+
 <h2>@ViewBag.Title</h2>
 
 <table class="table">
@@ -15,18 +22,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GroupName)
-        </td>
-        <td>
-            @Html.ActionLink("View employees", "Employees", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupName)
+            </td>
+            <td>
+                @Html.ActionLink("View employees", "Employees", 
+                    new { id = item.Id }, 
+                    new { onclick = "appInsights.trackPageView({ name: 'User clicked department link' });" }
+                )
+            </td>
+        </tr>
+    }
 
 </table>
