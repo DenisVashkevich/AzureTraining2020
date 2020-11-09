@@ -7,7 +7,16 @@
 @section scripts
  {
     <script type="text/javascript">
-        appInsights.trackPageView({ name: 'Departments (JS)' }); 
+        appInsights.trackPageView({ name: 'Departments (JS)' })
+
+        function trackOnClickTelemetry() {
+            appInsights.trackEvent({
+                name: 'User clicked on link',
+                properties: {
+                    departmentId: 'dep13'
+                }
+            });
+        }
     </script>
 }
 
@@ -34,7 +43,7 @@
             <td>
                 @Html.ActionLink("View employees", "Employees", 
                     new { id = item.Id }, 
-                    new { onclick = "appInsights.trackPageView({ name: 'User clicked department link' });" }
+                    new { onclick = "trackOnClickTelemetry();" }
                 )
             </td>
         </tr>
